@@ -49,7 +49,7 @@ export class TerminalComponent implements AfterViewInit {
       this.handleCommand()
       this.command = ""
     } catch (error) {
-      this.terminal.write("\r\x1B[1;31m" + error + "\x1B[0m")
+      this.terminal.write("\r\n\x1B[1;31m" + error + "\x1B[0m")
     } finally {
       this.terminal.write('\r\n' + this.typingIndicator)
       this.historyIndex = 0
@@ -103,7 +103,8 @@ export class TerminalComponent implements AfterViewInit {
   private handleCommand() {
     const command = this.command
     if (command.length > 0) {
-      switch (command) {
+      const action = command.split(" ")[0]
+      switch (action) {
         case "clear": 
           this.terminal.underlying.reset()
           break
@@ -112,6 +113,8 @@ export class TerminalComponent implements AfterViewInit {
           this.terminal.write('\r\n')
           this.terminal.write(result)
           break
+        default:
+          this.terminal.write('\r\nCommand not found: ' + action)
       }
     }
   }
