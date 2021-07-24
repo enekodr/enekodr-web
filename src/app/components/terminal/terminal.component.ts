@@ -47,10 +47,10 @@ export class TerminalComponent implements AfterViewInit {
     try {
       this.history.push(this.command)
       this.handleCommand()
-      this.command = ""
     } catch (error) {
       this.terminal.write("\r\n\x1B[1;31m" + error + "\x1B[0m")
     } finally {
+      this.command = ""
       this.terminal.write('\r\n' + this.typingIndicator)
       this.historyIndex = 0
     }
