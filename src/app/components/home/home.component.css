@@ -1,9 +1,14 @@
 .white-container {
     border-radius: 20px;
-    background-color: white;
-    padding: 30px;
     width: 80%;
     margin: 0 auto;
+    overflow: hidden;
+    color: white;
+}
+
+.padding-title {
+    margin: 0;
+    padding-top: 50px;
 }
 
 .title-group {
@@ -12,7 +17,24 @@
 }
 
 .title-group-element {
-    text-align: center;
     margin-top: 0;
     margin-bottom: 0;
+}
+
+h2 {
+    color: #eee;
+}
+
+h3 {
+    color: #ddd;
+}
+
+.separator {
+    height: 30px;
+}
+
+@media only screen and (max-width: 750px) {
+    .white-container {
+        text-align: center;
+    }
 }
