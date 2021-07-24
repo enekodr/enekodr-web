@@ -38,7 +38,7 @@ export class CommandService {
       case "help": return this.enekoHelpText()
       case "get": return this.handleGetAction(args)
       case "contact": return this.handleContactAction(args)
-      default: throw new Error("command not supported")
+      default: throw new Error(action + " command not supported.")
     }
   }
 
@@ -64,7 +64,7 @@ export class CommandService {
         "\rLocation:\t" + this.location + "\n" +
         "\r------------------"
         return text
-      default: throw new Error("information is not available")
+      default: throw new Error(element + " is not available.")
     }
   }
 
@@ -82,7 +82,7 @@ export class CommandService {
         window.location.href = "http://maps.apple.com/?q=alcala%20de%20henares"
         return "Opening maps..."
       case "help": return this.contactHelpText()
-      default: throw new Error("Contact method not available")
+      default: throw new Error(contacMethod + " contact method not supported")
     }
   }
 
