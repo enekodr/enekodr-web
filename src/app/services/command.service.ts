@@ -37,6 +37,8 @@ export class CommandService {
     switch (action) {
       case "help": return this.enekoHelpText()
       case "get": return this.handleGetAction(args)
+      case "download": return this.handleDownloadAction(args)
+      case "visit": return this.handleVisitAction(args)
       case "contact": return this.handleContactAction(args)
       default: throw new Error(action + " command not supported.")
     }
@@ -68,6 +70,30 @@ export class CommandService {
     }
   }
 
+  private handleDownloadAction(args: string[]): string {
+    args.shift()
+    const element = args[0]
+    switch (element) {
+      case "help": return this.downloadHelpText()
+      case "cv": this.downloadFile("assets/cv-eneko-diaz-romero.pdf"); return "Downloading curriculum..."
+      case "memoji": this.downloadFile("assets/memoji.jpeg"); return "Downloading memoji..."
+      default: throw new Error(element + " is not available for downloading.")
+    }
+  }
+
+  private handleVisitAction(args: string[]): string {
+    args.shift()
+    const element = args[0]
+    switch (element) {
+      case "help": return this.visitHelpText()
+      case "github": window.open("https://github.com/enekodr", "_blank"); return "Opening GitHub page..."
+      case "twitter": window.open("https://twitter.com/enekodr", "_blank"); return "Opening Twitter page..."
+      case "linkedin": window.open("https://www.linkedin.com/in/eneko-diaz-romero/", "_blank"); return "Opening LinkedIn page..."
+      case "trello": window.open("https://goo.gl/hKePV4", "_blank"); return "Opening Trello page..."
+      default: throw new Error(element + " is not available for visiting.")
+    }
+  }
+
   private handleContactAction(args: string[]) {
     args.shift()
     const contacMethod = args[0]
@@ -79,7 +105,7 @@ export class CommandService {
         window.location.href = "tel:" + this.phone.replace(/ /g, "")
         return "Perfoming a phone call..."
       case "location":
-        window.location.href = "http://maps.apple.com/?q=alcala%20de%20henares"
+        window.open("https://www.google.com/maps/place/Alcalá+de+Henares,+Madrid/@40.4947687,-3.4367158,12z/data=!3m1!4b1!4m5!3m4!1s0xd424bd8c669e60b:0x555eb1454b21723!8m2!3d40.4819791!4d-3.3635421", "_blank")
         return "Opening maps..."
       case "help": return this.contactHelpText()
       default: throw new Error(contacMethod + " contact method not supported")
@@ -98,11 +124,13 @@ export class CommandService {
     const helpText = "\r\nAvailable commands:\n\n" +
     "\r\tget [option] - gets the requested information about Eneko\n" +
     "\r\tdownload [option] - downloads useful assets\n" +
+    "\r\tvisit [option] - navigate through related web pages\n" +
     "\r\tcontact [option] - performs operations to get in touch with Eneko\n" +
     "\r\nUsage examples:\n\n" +
     "\r\teneko get name\n" +
     "\r\teneko download cv\n" +
     "\r\teneko contact email\n" +
+    "\r\teneko visit github\n" +
     "\r\nTo get more info about each command, type:\n\n" +
     "\r\teneko [command] help"
     return helpText
@@ -121,11 +149,33 @@ export class CommandService {
     return helpText
   }
 
+  private downloadHelpText(): string {
+    const helpText = "\r\nThese are the available options for download command:\n\n" +
+    "\r\tcv\n" + 
+    "\r\tmemoji\n"
+    return helpText
+  }
+
+  private visitHelpText(): string {
+    const helpText = "\r\nThese are the available options for visit command:\n\n" +
+    "\r\tgithub\n" + 
+    "\r\tlinkedin\n" + 
+    "\r\ttwitter\n"
+    return helpText
+  }
+
   private contactHelpText(): string {
     const helpText = "\r\nThese are the available options for contact command:\n\n" +
     "\r\temail - Opens the mail app\n" +
     "\r\tphone - Performs a phone call to Eneko's number\n" +
     "\r\tlocation - Opens the map application to point where Eneko lives\n"
     return helpText
+  }
+
+  private downloadFile(url: string) {
+    const a = document.createElement('a');
+    a.href = url
+    a.download = url.substr(url.lastIndexOf('/') + 1);
+    a.click()
   }
 }
