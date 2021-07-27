@@ -1,9 +1,13 @@
-.white-container {
+.container {
     border-radius: 20px;
     width: 80%;
     margin: 0 auto;
     overflow: hidden;
     color: white;
+}
+
+.container-row {
+    width: 100%;
 }
 
 .padding-title {
@@ -33,8 +37,22 @@ h3 {
     height: 30px;
 }
 
+.alert {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid;
+    border-radius: .25rem;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
 @media only screen and (max-width: 750px) {
-    .white-container {
+    .container {
+        width: 100%;
         text-align: center;
     }
 }

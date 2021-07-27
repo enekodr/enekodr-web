@@ -7,7 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public android: boolean
+
+  constructor() { 
+    this.android = /Android/.test(navigator.userAgent)
+  }
 
   ngOnInit(): void {
   }
