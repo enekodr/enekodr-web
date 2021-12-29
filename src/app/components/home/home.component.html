@@ -1,15 +1,26 @@
 <div class="container">
-    <div class="container-row">
-        <h1 class="padding-title">Eneko Díaz Romero</h1>
+    <div class="header padding-bottom">
+        <h1 class="compact-title">Eneko Díaz Romero</h1>
         <div class="title-group">
             <h2 class="title-group-element">Software developer</h2>
             <h3 class="title-group-element">Alcalá de Henares, Madrid</h3>
         </div>
     </div>
-    <div *ngIf="!android" class="separator"></div>
-    <div *ngIf="android" class="alert alert-warning">
+    <app-warning-alert *ngIf="android">
         This page uses <a href="https://xtermjs.org">Xterm.js</a>, which currently does not support Android keyboard. See the <a href="https://github.com/reef-technologies/xterm.js/issues/1">issue</a> on GitHub
+    </app-warning-alert>
+    <app-terminal class="row terminal padding-bottom"></app-terminal>
+    <div class="row">
+        <app-card class="cell">
+            <p>Enjoying this web page? Check the code out on GitHub</p>
+        </app-card>
+        <div class="row-separator"></div>
+        <app-card class="cell">
+            <p>Tired or typing in the terminal? Directly download the curriculum</p>
+        </app-card>
+        <div class="row-separator"></div>
+        <app-card class="cell">
+            <p>Like rock music? Listen to my music band</p>
+        </app-card>
     </div>
-    <app-terminal class="container-row terminal"></app-terminal>
-    <div class="separator"></div>
 </div>

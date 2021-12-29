@@ -1,0 +1,13 @@
+.alert {
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid;
+    border-radius: .25rem;
+    text-align: center;
+}
+
+.alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
