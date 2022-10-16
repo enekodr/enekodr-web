@@ -29,7 +29,7 @@ export class TerminalComponent implements AfterViewInit {
   }
 
   private subscribeToKeyboardInputs() {
-    this.terminal.keyEventInput.subscribe(inputEvent => {
+    this.terminal.onKey().subscribe(inputEvent => {
       const keyboardEvent = inputEvent.domEvent
       switch (keyboardEvent.key) {
         case "Enter": this.enterKeyTapped(); break
@@ -148,5 +148,4 @@ export class TerminalComponent implements AfterViewInit {
     this.terminal.write("\r\n\n\x1B[1;32mNote\x1B[0m: you can clear the console by typing 'clear'")
     this.terminal.write('\r\n\n' + this.typingIndicator)
   }
-
 }
