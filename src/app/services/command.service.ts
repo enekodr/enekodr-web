@@ -76,7 +76,7 @@ export class CommandService {
     switch (element) {
       case "help": return this.downloadHelpText()
       case "cv": this.downloadFile("assets/cv-eneko-diaz-romero.pdf"); return "Downloading curriculum..."
-      case "memoji": this.downloadFile("assets/memoji.jpeg"); return "Downloading memoji..."
+      case "memoji": this.downloadFile("assets/memoji.jpg"); return "Downloading memoji..."
       default: throw new Error(element + " is not available for downloading.")
     }
   }
