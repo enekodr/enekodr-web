@@ -1,5 +1,6 @@
 import { ViewChild, Component, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { NgTerminal } from 'ng-terminal';
+import { Terminal } from 'xterm';
 import { CommandService } from 'src/app/services/command.service';
 
 @Component({
@@ -57,7 +58,8 @@ export class TerminalComponent implements AfterViewInit {
   }
 
   private backspaceKeyTapped() {
-    const cursorXPosition = this.terminal.underlying.buffer.active.cursorX - this.typingIndicator.length
+    const terminal = this.terminal.underlying as Terminal
+    const cursorXPosition = terminal.buffer.active.cursorX - this.typingIndicator.length
     const canErase = cursorXPosition > 0
     if (canErase) {
       this.command = this.command.slice(0, cursorXPosition - 1) + this.command.slice(cursorXPosition)
@@ -95,7 +97,8 @@ export class TerminalComponent implements AfterViewInit {
   }
 
   private keyTapped(key: string) {
-    const cursorXPosition = this.terminal.underlying.buffer.active.cursorX - this.typingIndicator.length
+    const terminal = this.terminal.underlying as Terminal
+    const cursorXPosition = terminal.buffer.active.cursorX - this.typingIndicator.length
     this.command = this.command.slice(0, cursorXPosition) + key + this.command.slice(cursorXPosition)
     this.terminal.write(key)
   }
@@ -105,8 +108,9 @@ export class TerminalComponent implements AfterViewInit {
     if (command.length > 0) {
       const action = command.split(" ")[0]
       switch (action) {
-        case "clear": 
-          this.terminal.underlying.reset()
+        case "clear":
+          const terminal = this.terminal.underlying as Terminal
+          terminal.reset()
           break
         case "eneko":
           const result = this.commandService.execute(command)
